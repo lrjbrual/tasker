@@ -15,4 +15,9 @@ export default class extends Controller {
     }
     // console.log(confirmation);
   }
+
+  beforeCreate() {
+    console.log("hello from me");
+  }
+
 }
