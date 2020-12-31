@@ -13,8 +13,13 @@ class TaskReflex < StimulusReflex::Reflex
   #using this I less the code adding method of complete and undo
   def toggle
     # binding.pry
-    @task.update(completed_at: element.checked ? Time.current : nil)
-  end
+    if element.checked
+      @task.update(completed_at: Time.current, completer: connection.current_user)
+      # @task.update(completed_at: element.checked ? Time.current : nil)
+    else
+      @task.update(completed_at: nil, completer: nil)
+    end
+   end
 
   def destroy
     @task.destroy

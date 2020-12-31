@@ -7,10 +7,12 @@
           <%= task.name %>
         </del>
         <br>
-        <span class="text-muted text-info" id="task-<%= task.id %>-assignee">
-         <%# using assignee&.name in assignee you can print the variable if not nil or nil or use the model as prefix %>
-          <%= task.assignee_name %>
-        </span>
+        <% if task.completer %>
+          <span class="text-muted">
+          <%# using assignee&.name in assignee you can print the variable if not nil or nil or use the model as prefix %>
+            Completed by: <%= task.completer_name %>
+          </span>
+        <% end %>
       <% else %>
         <%= task.name %>
         <br>
