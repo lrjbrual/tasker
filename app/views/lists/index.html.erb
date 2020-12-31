@@ -6,8 +6,8 @@
         <%= list.name %>
         </div>
           <div class="card-body p-0">
-            <div class="list-group list-group-flush">
-                <%= render list.tasks.incomplete_first %>
+            <div class="list-group list-group-flush" data-list-target="tasks">
+                <%= render list.tasks %>
             </div>
           </div>
           <div class="card-footer">

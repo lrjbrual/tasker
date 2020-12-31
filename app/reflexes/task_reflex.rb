@@ -20,6 +20,10 @@ class TaskReflex < StimulusReflex::Reflex
     @task.destroy
   end
 
+  def reorder(position)
+    @task.insert_at(position)
+  end
+  
   private
 
   def find_task
