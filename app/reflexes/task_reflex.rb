@@ -23,6 +23,14 @@ class TaskReflex < StimulusReflex::Reflex
   def reorder(position)
     @task.insert_at(position)
   end
+
+  def assign
+    @task.update(assignee_id: element.value)
+    # this will auto update the page when selecting the user then show the label that connect to the model
+    # that connect to the model delegation
+    morph "#task-#{@task.id}-assignee", @task.assignee_name
+    # morph :nothing
+  end
   
   private
 
