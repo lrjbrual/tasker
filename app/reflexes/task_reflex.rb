@@ -27,6 +27,7 @@ class TaskReflex < StimulusReflex::Reflex
 
   def reorder(position)
     @task.insert_at(position)
+    morph :nothing
   end
 
   def assign
@@ -36,11 +37,21 @@ class TaskReflex < StimulusReflex::Reflex
     morph "#task-#{@task.id}-assignee", @task.assignee_name
     # morph :nothing
   end
+
+  def update 
+    #must have morph dom issue for multiple times
+    @task.update(task_params)
+    morph "#task_#{@task.id}", ApplicationController.render(@task)
+  end
   
   private
 
   def find_task
     @task = Task.find(element.dataset.id)
+  end
+
+  def task_params
+    params.require(:task).permit(:name)
   end
 
 end
