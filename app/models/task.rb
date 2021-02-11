@@ -4,6 +4,7 @@ class Task < ApplicationRecord
   belongs_to :completer, class_name: "User", optional: true
   belongs_to :creator, class_name: "User"
   belongs_to :list
+  has_many :comments, as: :commentable
   validates :name, presence: true
 
   # adding to the index for order

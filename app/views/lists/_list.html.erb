@@ -1,0 +1,25 @@
+<div class="row my-3" data-controller="list" id="<%= dom_id(list) %>" data-reflex-root="#<%= dom_id(list) %>">
+  <div class="col">
+    <div class="card">
+      <div class="d-flex justify-content-between card-header">
+        <%= list.name %>
+        <%= link_to 'Delete', list_path(list), method: :delete, class: "text-danger", remote: true, data: {confirm: "Are you sure you want to delete #{list.name}"} %>
+      </div>
+        <div class="card-body p-0">
+          <div class="list-group list-group-flush" data-list-target="tasks">
+            <% if list.tasks.any? %>
+              <%= render list.tasks %>
+            <% else %>
+              <h5 class="p-4 mb-0">No Task</h5>
+            <% end %>
+          </div>
+        </div>
+        <div class="card-footer">
+          <%= bootstrap_form_with model: @new_task, id: "task-form-for-list-#{list.id}", url: '', layout: :inline, data: { reflex: "submit->List#create_task", list_id: list.id, list_target: "form"  } do |form| %>
+            <%= form.text_field :name, skip_label: true, wrapper_class: "flex-fill mr-2", class: "w-100", placeholder: "What needs to be done"%>
+            <%= form.submit "Add Task" %>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</div>
