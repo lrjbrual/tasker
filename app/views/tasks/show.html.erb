@@ -9,5 +9,18 @@
 <hr>
 
 <h3 class="mb-4">Comments</h3>
+<div id="comments">
+  <%= render @task.comments%>
+</div>
 
-<%= render @task.comments%>
+<div class="card">
+  <div class="card-header">
+    New Comment
+  </div>
+  <div class="card-body">
+    <%= bootstrap_form_with model: @new_comment, url: list_task_comments_path(@task.list, @task) do |f| %>
+      <%= f.text_area :body, skip_label: true %>
+      <%= f.primary %>
+    <% end %>
+  </div>
+</div>

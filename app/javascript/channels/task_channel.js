@@ -1,6 +1,8 @@
 import consumer from "./consumer"
+import CableReady from "cable_ready";
 
-consumer.subscriptions.create("ListsChannel", {
+consumer.subscriptions.create(
+  { channel: "TaskChannel", task_id: 3}, {
   connected() {
     // Called when the subscription is ready for use on the server
   },
@@ -10,6 +12,7 @@ consumer.subscriptions.create("ListsChannel", {
   },
 
   received(data) {
+    if(data.CableReady)CableReady.perform(data.operations);
     // Called when there's incoming data on the websocket for this channel
-  },
+  }
 });
